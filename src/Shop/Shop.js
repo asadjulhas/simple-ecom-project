@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Cart from '../Components/Cart/Cart';
 import Product from '../Components/Product/Product';
 import { cartTotalAmmount, shippingTotalAmmount } from '../utilities/CountPrice';
-import {cartToLocalStorage} from '../utilities/fakedb'
+import {cartToLocalStorage, getStoredCart} from '../utilities/fakedb'
 import './Shop.css'
 
 const Shop = () => {
@@ -16,33 +16,35 @@ const Shop = () => {
   //Product select count
   const [cart, setCart] = useState([]);
 
-  // Total price count
-  const [totalPrice, setTotalPrice] = useState(0);
-
-  // Total Shipping Charge: 
-  const [totalShipping, setTotaShipping] = useState(0);
+  useEffect(() => {
+    const storeCards = getStoredCart();
+    const saveCart = []
+    for (const storeCard in storeCards) {
+      const cartProducts = products.find(product => product.id === storeCard);
+      if(cartProducts) {
+        const quantity = storeCards[storeCard];
+        cartProducts.quantity = quantity;
+        saveCart.push(cartProducts)
+      }
+    }
+    setCart(saveCart)
+  },[products])
 
   // Event Handelar
   const addToCart = (product) => {
-    // setCount(count+1);
-    const newCart = [...cart, product]
+   let newCart = []
+    const productExists = cart.find(exProduct => exProduct.id === product.id)
+    if(productExists) {
+      const rest = cart.filter(p => p.id !== productExists.id);
+      productExists.quantity = productExists.quantity + 1;
+      newCart = [...rest, productExists]
+    } else {
+      product.quantity = 1;
+      newCart = [...cart, product]
+    }
     setCart(newCart);
     cartToLocalStorage(product.id)
   }
-
-  // Total price count
-  useEffect(() => {
-    setTotalPrice(cartTotalAmmount(cart))
-  },[cart])
-
-  // Total price count
-  useEffect(() => {
-    setTotaShipping(shippingTotalAmmount(cart))
-  },[cart])
-  
-
-  
-  
 
   return (
     <div className='shop'>
@@ -51,7 +53,7 @@ const Shop = () => {
         
       </div>
       <div className="cart_area">
-       <Cart count={cart.length} totalPrice={totalPrice} totalShipping={totalShipping}></Cart>
+       <Cart cart={cart}></Cart>
       </div>
     </div>
   );
