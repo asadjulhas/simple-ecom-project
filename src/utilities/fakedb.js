@@ -1,14 +1,31 @@
-const cartTotalAmmount = (products) => {
-  const countTotal = (x, y) => x + y.price;
-  const totalAmmount = products.reduce(countTotal,0);
-  return totalAmmount;
+const cartToLocalStorage= (id) => {
+  let shoppingCart;
+// Get Shopping cart
+const storedCart = localStorage.getItem('shopping-cart');
+if(storedCart) {
+  shoppingCart = JSON.parse(storedCart)
+} else {
+  shoppingCart = {}
 }
 
-
-const shippingTotalAmmount = (products) => {
-  const countTotal = (x, y) => x + y.shipping;
-  const totalAmmount = products.reduce(countTotal,0);
-  return totalAmmount;
+  // Add Quantity
+   const quantity = shoppingCart[id]
+   if(quantity) {
+     const newQuantity = quantity + 1;
+     shoppingCart[id] = newQuantity;
+   } else {
+    shoppingCart[id] = 1;
+   }
+   localStorage.setItem('shopping-cart', JSON.stringify(shoppingCart))
 }
 
-export {cartTotalAmmount, shippingTotalAmmount};
+const getStoredCart = () => {
+  let shoppingCart = {};
+    const storedCart = localStorage.getItem('shopping-cart');
+    if(storedCart) {
+      shoppingCart = JSON.parse(storedCart)
+    }
+    return shoppingCart;
+}
+
+export {cartToLocalStorage, getStoredCart}

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Cart from '../Components/Cart/Cart';
 import Product from '../Components/Product/Product';
-import { cartTotalAmmount, shippingTotalAmmount } from '../utilities/fakedb';
+import { cartTotalAmmount, shippingTotalAmmount } from '../utilities/CountPrice';
+import {cartToLocalStorage} from '../utilities/fakedb'
 import './Shop.css'
 
 const Shop = () => {
@@ -26,6 +27,7 @@ const Shop = () => {
     // setCount(count+1);
     const newCart = [...cart, product]
     setCart(newCart);
+    cartToLocalStorage(product.id)
   }
 
   // Total price count
