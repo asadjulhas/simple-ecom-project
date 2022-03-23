@@ -1,0 +1,33 @@
+.shop {
+	display: grid;
+	grid-template-columns: 4fr 1fr;
+  width: 85%;
+margin: 0 auto;
+}
+.products {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-gap: 30px;
+	margin-top: 100px;
+	margin-left: 30px;
+}
+.cart_area {
+  background: #FFE0B3;
+  height: 800px;
+  width: 270px;
+  margin-left: 20px;
+}
+
+@media only screen and (min-width: 767px) and (max-width: 1200px) { 
+  
+  .products {
+    grid-template-columns: repeat(2, 1fr); 
+  }
+
+}
+
+@media only screen and (max-width: 767px) {
+  .products {
+    grid-template-columns: repeat(1, 1fr); 
+  }
+}

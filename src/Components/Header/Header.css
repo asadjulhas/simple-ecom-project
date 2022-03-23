@@ -1,0 +1,22 @@
+.nav_area {
+	background: #1C2B35;
+}
+
+.nav_area {
+  display: flex;
+  justify-content: space-between;
+  padding: 13px 50px;
+}
+.menuA-area ul li {
+  list-style: none;
+  display: inline-block;
+}
+.menuA-area ul li a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 17px;
+  padding-left: 20px;
+}
+.menuA-area ul li a:hover{
+  color: orange;
+}
