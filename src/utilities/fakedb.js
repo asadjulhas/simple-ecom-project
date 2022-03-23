@@ -4,4 +4,11 @@ const cartTotalAmmount = (products) => {
   return totalAmmount;
 }
 
-export {cartTotalAmmount};
+
+const shippingTotalAmmount = (products) => {
+  const countTotal = (x, y) => x + y.shipping;
+  const totalAmmount = products.reduce(countTotal,0);
+  return totalAmmount;
+}
+
+export {cartTotalAmmount, shippingTotalAmmount};

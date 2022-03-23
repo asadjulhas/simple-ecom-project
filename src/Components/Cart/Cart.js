@@ -3,16 +3,18 @@ import './Cart.css'
 import Delete_icon from '../../images/delete.png'
 import Arrow_icon from '../../images/arrow-right.png'
 
-const Cart = ({count, totalPrice}) => {
+const Cart = ({count, totalPrice, totalShipping}) => {
+  const taxAmmount = (totalPrice * 0.1).toFixed(2);
+  const grandTotal = totalPrice + totalShipping + parseInt(taxAmmount);
   return (
     <div className='cart'>
       <h3>Order Summary</h3>
       <div className="order_details">
       Selected Items: {count} <br />
       Total Price: ${totalPrice} <br />
-      Total Shipping Charge: $5 <br />
-      Tax: $114<br />
-      <h4>Grand Total: $1559</h4>
+      Total Shipping Charge: ${totalShipping} <br />
+      Tax: ${taxAmmount}<br />
+      <h4>Grand Total: ${grandTotal}</h4>
       <button className='clear_btn'>Clear Cart <img src={Delete_icon} alt="" /></button>
       <button className='review_order'>Review Order <img src={Arrow_icon} alt="" /></button>
       </div>
