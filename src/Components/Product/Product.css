@@ -59,7 +59,16 @@
 .product button:hover{
  background: #FF3030;
 }
-
+.product_details button {
+	position: inherit;
+	width: 101px !important;
+	border: navajowhite;
+	margin-bottom: 53px;
+	border-radius: 4px;
+	background: #FF3030;
+	color: #fff;
+	height: 35px;
+}
 
 /* Responsive css */
 
