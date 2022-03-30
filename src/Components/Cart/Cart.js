@@ -5,7 +5,7 @@ import Arrow_icon from '../../images/arrow-right.png'
 
 const Cart = (props) => {
 const cart = props?.cart;
-  console.log(cart)
+  // console.log(cart)
   let quantity = 0;
   let totalPrice = 0;
   let totalShipping = 0;
