@@ -5,7 +5,7 @@ import Arrow_icon from '../../images/arrow-right.png'
 
 const Cart = (props) => {
 const cart = props?.cart;
-  // console.log(cart)
+const clearCart = props?.clearCart;
   let quantity = 0;
   let totalPrice = 0;
   let totalShipping = 0;
@@ -25,7 +25,7 @@ const cart = props?.cart;
       Total Shipping Charge: ${totalShipping} <br />
       Tax: ${taxAmmount}<br />
       <h4>Grand Total: ${grandTotal}</h4>
-      <button className='clear_btn'>Clear Cart <img src={Delete_icon} alt="" /></button>
+      <button onClick={clearCart} className='clear_btn'>Clear Cart <img src={Delete_icon} alt="" /></button>
       <button className='review_order'>Review Order <img src={Arrow_icon} alt="" /></button>
       </div>
     </div>

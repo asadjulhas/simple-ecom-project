@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Cart from '../Cart/Cart'
 import Item from '../Item/Item'
+import './Orders.css'
 
 const Orders = () => {
   
@@ -27,13 +28,20 @@ orderProduct.quantity = newQuantity
 }
 setCart(orderItems)
 },[products]);
+
+// CLear Cart
+const clearCart = () => {
+  localStorage.removeItem('shopping-cart')
+  setCart([])
+}
+
   return (
-    <div className='shop'>
+    <div className='order_page'>
       <div className="itemproduct">
       {cart.map((item, index) => <Item key={index} item={item}/>)}
       </div>
       <div className="cart_area">
-       {/* <Cart cart={cart}></Cart> */}
+       <Cart clearCart={clearCart} cart={cart}></Cart>
       </div>
     </div>
   );

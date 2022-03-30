@@ -45,6 +45,12 @@ const Shop = () => {
     cartToLocalStorage(product.id)
   }
 
+// CLear Cart
+  const clearCart = () => {
+    localStorage.removeItem('shopping-cart')
+    setCart([])
+  }
+
   return (
     <div className='shop'>
       <div className="products">
@@ -52,7 +58,7 @@ const Shop = () => {
         
       </div>
       <div className="cart_area">
-       <Cart cart={cart}></Cart>
+       <Cart clearCart={clearCart} cart={cart}></Cart>
       </div>
     </div>
   );

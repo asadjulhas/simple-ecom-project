@@ -2,7 +2,8 @@ import React from 'react';
 import './Item.css'
 
 const Item = ({item}) => {
-  const totalPrice =  (item?.price * item?.quantity) + item?.shipping;
+  const shipping = item?.shipping * item?.quantity
+  const totalPrice =  (item?.price * item?.quantity) + shipping;
   return (
     <div className='single_item'>
      <div className="pimag">
@@ -10,7 +11,7 @@ const Item = ({item}) => {
      </div>
      <div className="ptitle">
      <h4>{item?.name}</h4>
-     <p>Price:  <span className='price'>${item?.price}</span>&nbsp; Shipping Charge: <span className='price'>${item?.shipping}</span></p>
+     <p>Price:  <span className='price'>${item?.price}</span>&nbsp; Shipping Charge: <span className='price'>${shipping}</span></p>
      <p>Quantity: {item?.quantity} &nbsp; Total: <span className='totalprice'>${totalPrice}</span></p>
      </div>
      <div className="dlbtn">
