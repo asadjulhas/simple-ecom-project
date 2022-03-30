@@ -1,5 +1,8 @@
 import React from 'react';
 import './Item.css'
+import Delete_icon from '../../images/delete.png'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
 
 const Item = ({item}) => {
   const shipping = item?.shipping * item?.quantity
@@ -15,7 +18,7 @@ const Item = ({item}) => {
      <p>Quantity: {item?.quantity} &nbsp; Total: <span className='totalprice'>${totalPrice}</span></p>
      </div>
      <div className="dlbtn">
-       <button>Del</button>
+       <button><FontAwesomeIcon icon={faTrashCan} /></button>
      </div>
     </div>
   );

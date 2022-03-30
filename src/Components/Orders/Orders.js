@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Cart from '../Cart/Cart'
 import Item from '../Item/Item'
+import NotFound from '../NotFound/NotFound';
 import './Orders.css'
 
 const Orders = () => {
@@ -34,11 +35,12 @@ const clearCart = () => {
   localStorage.removeItem('shopping-cart')
   setCart([])
 }
-
   return (
     <div className='order_page'>
       <div className="itemproduct">
-      {cart.map((item, index) => <Item key={index} item={item}/>)}
+      {
+        cart.length > 0 ? cart.map((item, index) => <Item key={index} item={item}/>) : <h1>No item found</h1>
+      }
       </div>
       <div className="cart_area">
        <Cart clearCart={clearCart} cart={cart}></Cart>
