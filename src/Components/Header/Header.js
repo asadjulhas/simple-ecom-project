@@ -1,6 +1,8 @@
 import React from 'react';
 import './Header.css'
 import logo from '../../images/Logo.svg'
+import { Link } from 'react-router-dom';
+import CustomLink from '../../utilities/CustomLink';
 
 const Header = () => {
   return (
@@ -8,13 +10,12 @@ const Header = () => {
        <div className="logo_area">
          <img src={logo} alt="" />
        </div>
-       <div className="menuA-area">
-         <ul>
-           <li><a href="#">Order</a></li>
-           <li><a href="#">Order Review</a></li>
-           <li><a href="#">Manage Inventody</a></li>
-         </ul>
-       </div>
+       <nav className="menuA-area">
+         <CustomLink to="/">Home</CustomLink>
+         <CustomLink to="/shop">Shop</CustomLink>
+         <CustomLink to="/order">Order</CustomLink>
+         
+       </nav>
     </nav>
   );
 };

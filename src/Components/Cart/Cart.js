@@ -3,7 +3,9 @@ import './Cart.css'
 import Delete_icon from '../../images/delete.png'
 import Arrow_icon from '../../images/arrow-right.png'
 
-const Cart = ({cart}) => {
+const Cart = (props) => {
+const cart = props?.cart;
+  console.log(cart)
   let quantity = 0;
   let totalPrice = 0;
   let totalShipping = 0;

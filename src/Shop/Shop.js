@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Cart from '../Components/Cart/Cart';
 import Product from '../Components/Product/Product';
-import { cartTotalAmmount, shippingTotalAmmount } from '../utilities/CountPrice';
 import {cartToLocalStorage, getStoredCart} from '../utilities/fakedb'
 import './Shop.css'
 
