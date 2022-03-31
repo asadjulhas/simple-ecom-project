@@ -1,34 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import useCart from '../../Hooks/useCart';
+import UseProducts from '../../Hooks/UseProducts';
 import Cart from '../Cart/Cart'
 import Item from '../Item/Item'
 import NotFound from '../NotFound/NotFound';
 import './Orders.css'
 
 const Orders = () => {
-  
-  const [products, setProduct] = useState([]);
+  const [products, setProduct] = UseProducts();
   const getOrders = JSON.parse(localStorage.getItem('shopping-cart'));
-  useEffect(() => {
-  if(getOrders) {
-    fetch('products.json')
-    .then(res => res.json())
-    .then(products => setProduct(products))
-  }
-},[]);
 
-const [cart, setCart] = useState([]);
-useEffect(() => {
-let orderItems = []
-for(const order in getOrders) {
- const orderProduct = products.find(product => product.id === order)
-if(orderProduct) {
-  const newQuantity = getOrders[order];
-orderProduct.quantity = newQuantity
- orderItems.push(orderProduct)
-  }
-}
-setCart(orderItems)
-},[products]);
+//Product select count
+  const [cart, setCart] = useCart(products);
 
 // CLear Cart
 const clearCart = () => {
