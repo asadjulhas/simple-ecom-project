@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import useCart from '../../Hooks/useCart';
 import UseProducts from '../../Hooks/UseProducts';
+import clearCart from '../../utilities/ClearCart';
 import Cart from '../Cart/Cart'
 import Item from '../Item/Item'
 import NotFound from '../NotFound/NotFound';
@@ -13,11 +14,6 @@ const Orders = () => {
 //Product select count
   const [cart, setCart] = useCart(products);
 
-// CLear Cart
-const clearCart = () => {
-  localStorage.removeItem('shopping-cart')
-  setCart([])
-}
   return (
     <div className='order_page'>
       <div className="itemproduct">
@@ -26,7 +22,7 @@ const clearCart = () => {
       }
       </div>
       <div className="cart_area">
-       <Cart clearCart={clearCart} cart={cart}></Cart>
+       <Cart clearCart={()=>clearCart(setCart)} cart={cart}></Cart>
       </div>
     </div>
   );
