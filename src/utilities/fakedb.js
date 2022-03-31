@@ -18,6 +18,12 @@ if(storedCart) {
    }
    localStorage.setItem('shopping-cart', JSON.stringify(shoppingCart))
 }
+// Remove from cart
+const RemoveFromLocalStorage= (id) => {
+   const shoppingCart = JSON.parse(localStorage.getItem('shopping-cart'));
+   delete shoppingCart[id];
+   localStorage.setItem('shopping-cart', JSON.stringify(shoppingCart))
+}
 
 const getStoredCart = () => {
   let shoppingCart = {};
@@ -28,4 +34,4 @@ const getStoredCart = () => {
     return shoppingCart;
 }
 
-export {cartToLocalStorage, getStoredCart}
+export {cartToLocalStorage, RemoveFromLocalStorage, getStoredCart}

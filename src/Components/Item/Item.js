@@ -3,10 +3,15 @@ import './Item.css'
 import Delete_icon from '../../images/delete.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
+import { getStoredCart } from '../../utilities/fakedb';
+import useCart from '../../Hooks/useCart';
+import UseProducts from '../../Hooks/UseProducts';
 
-const Item = ({item}) => {
+const Item = ({item, removeItem}) => {
   const shipping = item?.shipping * item?.quantity
   const totalPrice =  (item?.price * item?.quantity) + shipping;
+  const [products, setProducts] = UseProducts();
+  const [cart, setCart] = useCart(products)  
   return (
     <div className='single_item'>
      <div className="pimag">
@@ -18,7 +23,7 @@ const Item = ({item}) => {
      <p>Quantity: {item?.quantity} &nbsp; Total: <span className='totalprice'>${totalPrice}</span></p>
      </div>
      <div className="dlbtn">
-       <button><FontAwesomeIcon icon={faTrashCan} /></button>
+       <button onClick={()=>removeItem(item.id)}><FontAwesomeIcon icon={faTrashCan} /></button>
      </div>
     </div>
   );

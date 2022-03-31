@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import useCart from '../../Hooks/useCart';
 import UseProducts from '../../Hooks/UseProducts';
 import clearCart from '../../utilities/ClearCart';
+import { RemoveFromLocalStorage } from '../../utilities/fakedb';
 import Cart from '../Cart/Cart'
 import Item from '../Item/Item'
-import NotFound from '../NotFound/NotFound';
 import './Orders.css'
 
 const Orders = () => {
@@ -14,11 +14,18 @@ const Orders = () => {
 //Product select count
   const [cart, setCart] = useCart(products);
 
+  //remove from cart
+  const removeItem = (id) => {
+    const newCart = cart.filter(item => item.id !== id);
+    setCart(newCart);
+    RemoveFromLocalStorage(id)
+  }
+
   return (
     <div className='order_page'>
       <div className="itemproduct">
       {
-        cart.length > 0 ? cart.map((item, index) => <Item key={index} item={item}/>) : <h1>No item found</h1>
+        cart.length > 0 ? cart.map((item, index) => <Item removeItem={removeItem} key={item.id} item={item}/>) : <h1>No item found</h1>
       }
       </div>
       <div className="cart_area">
