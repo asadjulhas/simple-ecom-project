@@ -19,7 +19,16 @@ const useCart = (products) => {
       }
       setCart(saveCart)
     },[products])
-    return [cart, setCart]
+    let cartAlert;
+
+    if(cart.length === 0) {
+      cartAlert = <p>Please add at least one items</p>
+    } else if (cart.length === 1) {
+      cartAlert = <p>Please add more ...</p>
+    } else {
+      cartAlert = <p>Thanks for adding items</p>
+    }
+    return [cart, setCart, cartAlert]
   };
 
 export default useCart;

@@ -6,13 +6,15 @@ import { RemoveFromLocalStorage } from '../../utilities/fakedb';
 import Cart from '../Cart/Cart'
 import Item from '../Item/Item'
 import './Orders.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMoneyCheck } from '@fortawesome/free-solid-svg-icons'
 
 const Orders = () => {
   const [products, setProduct] = UseProducts();
   const getOrders = JSON.parse(localStorage.getItem('shopping-cart'));
 
 //Product select count
-  const [cart, setCart] = useCart(products);
+  const [cart, setCart, cartAlert] = useCart(products);
 
   //remove from cart
   const removeItem = (id) => {
@@ -29,7 +31,9 @@ const Orders = () => {
       }
       </div>
       <div className="cart_area">
-       <Cart clearCart={()=>clearCart(setCart)} cart={cart}></Cart>
+       <Cart clearCart={()=>clearCart(setCart)} cart={cart} cartAlert={cartAlert}>
+       <button className='review_order'>Procedd checkout <FontAwesomeIcon icon={faMoneyCheck}></FontAwesomeIcon></button>
+       </Cart>
       </div>
     </div>
   );

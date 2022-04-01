@@ -6,6 +6,7 @@ import Cart from '../Cart/Cart'
 import UseProducts from '../../Hooks/UseProducts';
 import './ProductDetails.css'
 import clearCart from '../../utilities/ClearCart';
+import ReviewButton from '../../utilities/ReviewButton';
 
 const ProductDetails = () => {
   const {id} = useParams();
@@ -18,7 +19,7 @@ const ProductDetails = () => {
   },[]);
 
   const showProduct = products.find(product => product.id === id);
-const [cart, setCart] = useCart(products);
+const [cart, setCart, cartAlert] = useCart(products);
 
   return (
     <div className="single_product_page">
@@ -36,7 +37,9 @@ const [cart, setCart] = useCart(products);
     </div>
  </div>
  <div className="cart_area">
- <Cart clearCart={()=>clearCart(setCart)} cart={cart}></Cart>
+ <Cart clearCart={()=>clearCart(setCart)} cart={cart} cartAlert={cartAlert}>
+   <ReviewButton></ReviewButton>
+ </Cart>
 </div>
     </div>
   );

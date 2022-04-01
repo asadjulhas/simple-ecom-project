@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import Cart from '../Components/Cart/Cart';
 import Product from '../Components/Product/Product';
@@ -5,13 +6,14 @@ import useCart from '../Hooks/useCart';
 import UseProducts from '../Hooks/UseProducts';
 import clearCart from '../utilities/ClearCart';
 import {cartToLocalStorage, getStoredCart} from '../utilities/fakedb'
+import ReviewButton from '../utilities/ReviewButton';
 import './Shop.css'
 
 const Shop = () => {
   const [products, setProduct] = UseProducts();
 
   //Product select count
-  const [cart, setCart] = useCart(products);
+  const [cart, setCart, cartAlert] = useCart(products);
 
   // Event Handelar
   const addToCart = (product) => {
@@ -29,8 +31,6 @@ const Shop = () => {
     cartToLocalStorage(product.id)
   }
 
-// CLear Cart
-  
 
   return (
     <div className='shop'>
@@ -39,7 +39,9 @@ const Shop = () => {
         
       </div>
       <div className="cart_area">
-       <Cart clearCart={()=>clearCart(setCart)} cart={cart}></Cart>
+       <Cart clearCart={()=>clearCart(setCart)} cart={cart} cartAlert={cartAlert}>
+      <ReviewButton></ReviewButton>
+       </Cart>
       </div>
     </div>
   );
