@@ -1,6 +1,6 @@
 # Getting Started with simple-ecom-project App
 
-Simple-ecom-project[Create React App](https://simple-ecom-project.netlify.app/).
+Simple-ecom-project [Live preview here](https://simple-ecom-project.netlify.app/).
 
 ## Available Scripts
 
