@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import useCart from '../../Hooks/useCart';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faShoppingBag } from '@fortawesome/free-solid-svg-icons'
 
 import Cart from '../Cart/Cart'
-import UseProducts from '../../Hooks/UseProducts';
 import './ProductDetails.css'
 import clearCart from '../../utilities/ClearCart';
 import ReviewButton from '../../utilities/ReviewButton';
+import { cartToLocalStorage } from '../../utilities/fakedb';
 
 const ProductDetails = () => {
   const {id} = useParams();
@@ -19,7 +21,25 @@ const ProductDetails = () => {
   },[]);
 
   const showProduct = products.find(product => product.id === id);
-const [cart, setCart, cartAlert] = useCart(products);
+
+ //Product select count
+ const [cart, setCart, cartAlert] = useCart(products);
+
+ // Event Handelar
+ const addToCart = (product) => {
+  let newCart = []
+   const productExists = cart.find(exProduct => exProduct.id === product.id)
+   if(productExists) {
+     const rest = cart.filter(p => p.id !== productExists.id);
+     productExists.quantity = productExists.quantity + 1;
+     newCart = [...rest, productExists]
+   } else {
+     product.quantity = 1;
+     newCart = [...cart, product]
+   }
+   setCart(newCart);
+   cartToLocalStorage(product.id)
+ }
 
   return (
     <div className="single_product_page">
@@ -35,6 +55,7 @@ const [cart, setCart, cartAlert] = useCart(products);
       <small>Shipping: ${showProduct?.shipping}</small>, &nbsp;<small>Stock: {showProduct?.stock}</small>
       </p>
     </div>
+    <button className='de_add_to_cart' onClick={()=>addToCart(showProduct)}>Add to Cart &nbsp;<FontAwesomeIcon icon={faShoppingBag}></FontAwesomeIcon></button>
  </div>
  <div className="cart_area">
  <Cart clearCart={()=>clearCart(setCart)} cart={cart} cartAlert={cartAlert}>
