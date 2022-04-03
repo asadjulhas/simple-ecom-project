@@ -8,7 +8,7 @@ import Cart from '../Cart/Cart'
 import './ProductDetails.css'
 import clearCart from '../../utilities/ClearCart';
 import ReviewButton from '../../utilities/ReviewButton';
-import { cartToLocalStorage } from '../../utilities/fakedb';
+import AddToCartFun from '../../Hooks/AddToCartFun';
 
 const ProductDetails = () => {
   const {id} = useParams();
@@ -27,19 +27,8 @@ const ProductDetails = () => {
 
  // Event Handelar
  const addToCart = (product) => {
-  let newCart = []
-   const productExists = cart.find(exProduct => exProduct.id === product.id)
-   if(productExists) {
-     const rest = cart.filter(p => p.id !== productExists.id);
-     productExists.quantity = productExists.quantity + 1;
-     newCart = [...rest, productExists]
-   } else {
-     product.quantity = 1;
-     newCart = [...cart, product]
-   }
-   setCart(newCart);
-   cartToLocalStorage(product.id)
- }
+  AddToCartFun(product, cart, setCart);
+}
 
   return (
     <div className="single_product_page">

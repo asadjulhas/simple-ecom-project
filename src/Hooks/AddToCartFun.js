@@ -3,7 +3,7 @@ import useCart from "./useCart";
 import UseProducts from "./UseProducts";
 
 
-const addToCart = (product, cart, setCart) => {
+const AddToCartFun = (product, cart, setCart) => {
   let newCart = []
    const productExists = cart.find(exProduct => exProduct.id === product.id)
    if(productExists) {
@@ -18,4 +18,4 @@ const addToCart = (product, cart, setCart) => {
    cartToLocalStorage(product.id)
  }
 
- export default addToCart;
+ export default AddToCartFun;
