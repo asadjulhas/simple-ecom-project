@@ -22,11 +22,29 @@ const Shop = () => {
   }
 
 
+  // Search Handelar
+  const [srProduct, setSrProduct] = useState([]);
+  const [searchText, setSearchText] = useState('');
+const searchProduct = (event) => {
+  setSearchText(event.target.value.toLowerCase());
+}
+useEffect(() => {
+   fetch('products.json')
+   .then(res => res.json())
+   .then(data => {
+    const findSearch = data.filter(p => p.name.toLowerCase().includes(searchText));
+    setSrProduct(findSearch)
+   })
+},[searchText])
+
   return (
     <div className='shop'>
+      <div className="products_area">
+      <input onChange={searchProduct} style={{marginTop: '20px', padding: '5px 8px'}} type="text" placeholder='Search product' />
       <div className="products">
-        {products.map(product => <Product key={product.id} setCount={addToCart} product={product}></Product>)}
+        {srProduct.map(product => <Product key={product.id} setCount={addToCart} product={product}></Product>)}
         
+      </div>
       </div>
       <div className="cart_area">
        <Cart clearCart={()=>clearCart(setCart)} cart={cart} cartAlert={cartAlert}>
