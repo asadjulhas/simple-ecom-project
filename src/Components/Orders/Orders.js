@@ -8,6 +8,7 @@ import Item from '../Item/Item'
 import './Orders.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMoneyCheck } from '@fortawesome/free-solid-svg-icons'
+import { useNavigate } from 'react-router-dom';
 
 const Orders = () => {
   const [products, setProduct] = UseProducts();
@@ -23,6 +24,7 @@ const Orders = () => {
     RemoveFromLocalStorage(id)
   }
 
+  const toNagivate = useNavigate();
   return (
     <div className='order_page'>
       <div className="itemproduct">
@@ -32,7 +34,7 @@ const Orders = () => {
       </div>
       <div className="cart_area">
        <Cart clearCart={()=>clearCart(setCart)} cart={cart} cartAlert={cartAlert}>
-       <button className='review_order'>Procedd checkout <FontAwesomeIcon icon={faMoneyCheck}></FontAwesomeIcon></button>
+       <button onClick={()=> toNagivate('/inventory')} className='review_order'>Procedd checkout <FontAwesomeIcon icon={faMoneyCheck}></FontAwesomeIcon></button>
        </Cart>
       </div>
     </div>
