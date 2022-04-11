@@ -20,6 +20,7 @@ const Header = () => {
        <nav className="menuA-area">
          <CustomLink to="/">Home</CustomLink>
          <CustomLink to="/shop">Shop</CustomLink>
+         <CustomLink to="/inventory">Inventory</CustomLink>
          <CustomLink to="/order">Order</CustomLink>
          {user?.uid ? <CustomLink onClick={logout} to="" >Logout</CustomLink> : <CustomLink to="/register">Register</CustomLink>
         }
@@ -27,9 +28,9 @@ const Header = () => {
         }
          
        </nav>
-      <div className="user_info">
+      {user?.uid ? <div className="user_info">
       <p>{user?.email}</p>
-      </div>
+      </div> : ''}
     </nav>
   );
 };

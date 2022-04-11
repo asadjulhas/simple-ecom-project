@@ -34,7 +34,7 @@ const Orders = () => {
       </div>
       <div className="cart_area">
        <Cart clearCart={()=>clearCart(setCart)} cart={cart} cartAlert={cartAlert}>
-       <button onClick={()=> toNagivate('/inventory')} className='review_order'>Procedd checkout <FontAwesomeIcon icon={faMoneyCheck}></FontAwesomeIcon></button>
+       <button onClick={()=> toNagivate('/shipment')} className='review_order'>Procedd checkout <FontAwesomeIcon icon={faMoneyCheck}></FontAwesomeIcon></button>
        </Cart>
       </div>
     </div>
