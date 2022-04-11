@@ -3,8 +3,15 @@ import './Header.css'
 import logo from '../../images/Logo.svg'
 import { Link } from 'react-router-dom';
 import CustomLink from '../../utilities/CustomLink';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
+import { signOut } from 'firebase/auth';
 
 const Header = () => {
+  const [user] = useAuthState(auth);
+  const logout = () => {
+    signOut(auth);
+  };
   return (
     <nav className='nav_area'>
        <div className="logo_area">
@@ -14,10 +21,15 @@ const Header = () => {
          <CustomLink to="/">Home</CustomLink>
          <CustomLink to="/shop">Shop</CustomLink>
          <CustomLink to="/order">Order</CustomLink>
-         <CustomLink to="/register">Register</CustomLink>
-         <CustomLink to="/login">Login</CustomLink>
+         {user?.uid ? <CustomLink onClick={logout} to="" >Logout</CustomLink> : <CustomLink to="/register">Register</CustomLink>
+        }
+         {user?.uid ? '' : <CustomLink to="/login">Login</CustomLink>
+        }
          
        </nav>
+      <div className="user_info">
+      <p>{user?.email}</p>
+      </div>
     </nav>
   );
 };

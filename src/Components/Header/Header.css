@@ -20,3 +20,6 @@
 .menuA-area a:hover{
   color: orange;
 }
+.user_info p {
+	color: #fff;
+}
