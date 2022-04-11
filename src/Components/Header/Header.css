@@ -3,9 +3,10 @@
 }
 
 .nav_area {
-  display: flex;
-  justify-content: space-between;
-  padding: 13px 50px;
+	display: flex;
+	justify-content: space-between;
+	padding: 13px 50px;
+	align-items: center;
 }
 .menuA-area {
 	display: flex;
